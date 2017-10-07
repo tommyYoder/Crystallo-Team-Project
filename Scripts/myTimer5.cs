@@ -11,7 +11,7 @@ public class myTimer5 : MonoBehaviour {
     public AudioSource TimerSound;
 
 
-    BlueTeam_GameOver_FinalLevel
+   
     // Use this for initialization
     void Start()
     {
