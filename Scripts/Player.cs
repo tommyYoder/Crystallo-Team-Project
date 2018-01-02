@@ -23,8 +23,18 @@ public class Player : MonoBehaviour {
     public AudioSource DoorSound;
     public AudioSource WarpSound;
     public AudioSource KnightSound;
+    public AudioSource DeathSound;
+    public AudioSource lavaDeath;
+    public AudioSource waterDeathSound;
+    public AudioSource checkPointSound;
 
-  
+
+    public GameObject LoadingScreen;
+    public float delay = 2.5f;
+    public string newGameLevel;
+    public Animator loadingScreen;
+    public Animator Fade;
+    public Animator fade;
 
     public float jumpHeight = 8;
    
@@ -42,12 +52,10 @@ public class Player : MonoBehaviour {
     public FloorSpikeTrigger FloorSpikeTrigger;
     public SwooshTrigger SwooshTrigger;
 
-    public myTimer myTimer;
-    public myTimer1 myTimer1;
+  
+    
     public myTimer2 myTimer2;
-    public myTimer4 myTimer4;
-    public myTimer5 myTimer5;
-    public myTimer13 myTimer13;
+   
 
     private bool IsTiming = false;
 
@@ -72,7 +80,7 @@ public class Player : MonoBehaviour {
 
         isFalling = false;                                                  // isFalling is set to false.
 
-        score = 0;                                                         // Score is set to 0.
+        score = PlayerPrefs.GetInt ("CurrentScore");                       // Score is set to Player Prefs.
          
         setScoreText();                                                   // Looks for score text.
 
@@ -82,16 +90,12 @@ public class Player : MonoBehaviour {
 
         seconds = 0;                                                   // Seconds is set to 0.
 
-        deaths = 0;                                                   // Deaths is set to 0.
+        deaths = PlayerPrefs.GetInt("DeathCurrentLives");             // Deaths is set to Player Prefs.
 
         setDeathsText();                                             // Looks fr death text.
 
 
         GetComponent<Collider>().enabled = true;                    // Collider is set to true.
-
-       
-
-
 
         scoreText = GameObject.Find("ScoreText").GetComponentInChildren<Text>();      // Looks for score text on the player and player clone.
 
@@ -205,6 +209,16 @@ public class Player : MonoBehaviour {
             score = score + 50;
             CoinSound.Play();
             Destroy(other.gameObject);
+            PlayerPrefs.SetInt("CurrentScore", score);
+            setScoreText();
+        }
+        //Destroy Objects
+        if (other.gameObject.CompareTag("Bones"))
+        {
+            count = count + 1;
+            score = score + 50;
+            Destroy(other.gameObject);
+            PlayerPrefs.SetInt("CurrentScore", score);
             setScoreText();
         }
         //Collect Coins
@@ -214,6 +228,7 @@ public class Player : MonoBehaviour {
             score = score + 75;
             CoinSound.Play();
             Destroy(other.gameObject);
+            PlayerPrefs.SetInt("CurrentScore", score);
             setScoreText();
         }
         //Collect Huge Coin
@@ -223,6 +238,7 @@ public class Player : MonoBehaviour {
             score = score + 1500;
             CoinSound.Play();
             Destroy(other.gameObject);
+            PlayerPrefs.SetInt("CurrentScore", score);
             setScoreText();
         }
         //Collect Candy Object
@@ -232,7 +248,14 @@ public class Player : MonoBehaviour {
             score = score + 6000;
             CandySound.Play();
             Destroy(other.gameObject);
+            PlayerPrefs.SetInt("CurrentScore", score);
             setScoreText();
+        }
+        if(other.gameObject.tag == "CheckPoint")
+        {
+            checkPointSound.Play();
+            yield return new WaitForSeconds(.2f);
+            Destroy(other.gameObject);
         }
         //Death Event
         if (other.gameObject.CompareTag("Mine"))
@@ -243,6 +266,8 @@ public class Player : MonoBehaviour {
             count = count + 1;
             deaths = deaths + 1;
             setDeathsText();
+            DeathSound.Play();
+            PlayerPrefs.SetInt("DeathCurrentLives", deaths);
             yield return new WaitForSeconds(2);
             GetComponent<Collider>().enabled = true;
             rb.useGravity = true;
@@ -256,6 +281,52 @@ public class Player : MonoBehaviour {
             
             
         }
+        //Death Event
+        if (other.gameObject.CompareTag("Mine2"))
+        {
+            GetComponent<Collider>().enabled = false;
+            rb.useGravity = false;
+            rb.isKinematic = true;
+            count = count + 1;
+            deaths = deaths + 1;
+            setDeathsText();
+            waterDeathSound.Play();
+            PlayerPrefs.SetInt("DeathCurrentLives", deaths);
+            yield return new WaitForSeconds(2);
+            GetComponent<Collider>().enabled = true;
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            WallSpikeTrigger.WallSpikeSound.Stop();
+            WallSpikeTrigger.WallSpikeSound.loop = false;
+            FloorSpikeTrigger.FloorSpikeSound.Stop();
+            FloorSpikeTrigger.FloorSpikeSound.loop = false;
+            SwooshTrigger.SwooshSound.Stop();
+            SwooshTrigger.SwooshSound.loop = false;
+
+
+        }
+        //Death Event
+        if (other.gameObject.tag == "Lava")
+        {
+            GetComponent<Collider>().enabled = false;
+            rb.useGravity = false;
+            rb.isKinematic = true;
+            count = count + 1;
+            deaths = deaths + 1;
+            setDeathsText();
+            lavaDeath.Play();
+            PlayerPrefs.SetInt("DeathCurrentLives", deaths);
+            yield return new WaitForSeconds(2);
+            GetComponent<Collider>().enabled = true;
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            WallSpikeTrigger.WallSpikeSound.Stop();
+            WallSpikeTrigger.WallSpikeSound.loop = false;
+            FloorSpikeTrigger.FloorSpikeSound.Stop();
+            FloorSpikeTrigger.FloorSpikeSound.loop = false;
+            SwooshTrigger.SwooshSound.Stop();
+            SwooshTrigger.SwooshSound.loop = false;
+        }
 
         // First Level Key
         if (other.gameObject.tag == "Key")
@@ -263,8 +334,14 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.5f);
-            SceneManager.LoadScene("LoadingScreen 4");
+            yield return new WaitForSeconds(1.0f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
+           SceneManager.LoadScene("LoadingScreen 4");         
         }
         // First_1 Level Key
         if (other.gameObject.tag == "Key4")
@@ -272,7 +349,13 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 5");
         }
 
@@ -282,7 +365,13 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 7");
         }
 
@@ -292,7 +381,13 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 10");
         }
 
@@ -302,7 +397,13 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 1");
         }
 
@@ -312,7 +413,13 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 12");
         }
 
@@ -322,7 +429,15 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            GetComponent<Animator>().SetTrigger("Fade");               // For lava sound.
+            fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 8");
         }
 
@@ -332,7 +447,15 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            GetComponent<Animator>().SetTrigger("Fade");               // For lava sound.
+            fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 11");
         }
 
@@ -342,7 +465,13 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             WarpSound.Play();
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(.5f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 7");
         }
 
@@ -352,7 +481,13 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             WarpSound.Play();
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(.5f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 10");
         }
 
@@ -362,7 +497,13 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             WarpSound.Play();
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(.5f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 2");
         }
 
@@ -372,7 +513,13 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             WarpSound.Play();
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(.5f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 13");
         }
 
@@ -382,7 +529,13 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             KnightSound.Play();
-            yield return new WaitForSeconds(1.2f);
+            yield return new WaitForSeconds(1.3f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("End_Credits");
         }
 
@@ -392,25 +545,16 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             KnightSound.Play();
-            yield return new WaitForSeconds(1.2f);
+            yield return new WaitForSeconds(1.3f);
+            LoadingScreen.SetActive(true);
+            GetComponent<Animator>().SetTrigger("Fader");
+            loadingScreen.SetTrigger("Fader");
+            GetComponent<Animator>().SetTrigger("Fade");
+            Fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("End_Credits 1");
         }
-        //Add Time First Level  
-        if (other.gameObject.tag == "Timer")
-        {
-            count = count + 1;
-            myTimer.myCoolTimer += 50;
-            TimerSound.Play();
-            Destroy(other.gameObject);
-        }
-        //Add time Water Level Normal
-        if (other.gameObject.tag == "Timer3")
-        {
-            count = count + 1;
-            myTimer1.myCoolTimer += 55;
-            TimerSound.Play();
-            Destroy(other.gameObject);
-        }
+     
         //Add time Water Coin Level   
         if (other.gameObject.tag == "Timer2")
         {
@@ -419,30 +563,7 @@ public class Player : MonoBehaviour {
             TimerSound.Play();
             Destroy(other.gameObject);
         }
-        //Add time Fire Level   
-        if (other.gameObject.tag == "Timer4")
-        {
-            count = count + 1;
-            myTimer4.myCoolTimer += 50;
-            TimerSound.Play();
-            Destroy(other.gameObject);
-        }
-        //Add time Final Level   
-        if (other.gameObject.tag == "Timer5")
-        {
-            count = count + 1;
-            myTimer5.myCoolTimer += 50;
-            TimerSound.Play();
-            Destroy(other.gameObject);
-        }
-        //Add time Water Level Destryed 
-        if (other.gameObject.tag == "Timer13")
-        {
-            count = count + 1;
-            myTimer13.myCoolTimer += 50;
-            TimerSound.Play();
-            Destroy(other.gameObject);
-        }
+       
     }
       
     
@@ -452,13 +573,15 @@ public class Player : MonoBehaviour {
 
         if (scoreText != null)
          scoreText.text = "Score:" + score.ToString();
- }
+        PlayerPrefs.SetInt("CurrentScore", score);
+    }
     // Sets Death counter to UI board
     void setDeathsText()
     {
 
         if (deathsText != null)
             deathsText.text = "Deaths:" + deaths.ToString();
+        PlayerPrefs.SetInt("DeathCurrentLives", deaths);
     }
 
     

@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MineSplode_4 : MonoBehaviour
 {
-   
+   //Use for Escape level
     public Transform Player;
     private GameObject Mine;
     public Transform destination;
- 
+    public AudioSource WarpSound;
+  
  
    float nextTimeToSearch = 0;
 
@@ -33,7 +34,8 @@ public class MineSplode_4 : MonoBehaviour
         }
 
     }
-    void FindPlayer()                                           // If time to search is less then or equal to time, then script will look for player tag by its transform position.
+    // If time to search is less then or equal to time, then script will look for player tag by its transform position.
+    void FindPlayer()                                         
     {
         if (nextTimeToSearch <= Time.time)
         {
@@ -53,14 +55,14 @@ public class MineSplode_4 : MonoBehaviour
             Mine = GameObject.Find("Mine");
 
             Mine.GetComponent<MeshRenderer>().enabled = true;
-
+            WarpSound.Play();
             KillPlayer();
             
         }
     }
 
-   
-    void KillPlayer()                       // Will transport the player to the destenation by its transform position. This is effective for teleporting the player to different areas in the game level.
+    // Will transport the player to the destenation by its transform position. This is effective for teleporting the player to different areas in the game level.
+    void KillPlayer()                     
     {
 
 

@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MineSplode : MonoBehaviour
+public class MineSplode2 : MonoBehaviour
 {
-   
+    //Use for Water level
     public Transform destination;
     public Transform Player;
-    private GameObject Mine;
+    private GameObject Mine2;
     public GameObject deathParticle;
     public GameObject Eyes;
 
@@ -53,10 +53,10 @@ public class MineSplode : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")                                 
-        { 
-            Mine = GameObject.Find("Mine");
+        {
+            Mine2 = GameObject.Find("Mine2");
 
-            Mine.GetComponent<MeshRenderer>().enabled = true;
+            Mine2.GetComponent<MeshRenderer>().enabled = true;
             KillPlayer();
            
             StartCoroutine("KillPlayer");
@@ -76,7 +76,7 @@ public class MineSplode : MonoBehaviour
 
         if (Player == null)
         {
-            Mine = GameObject.Find("Player(Clone)");
+            Mine2 = GameObject.Find("Player(Clone)");
         }
         else
         {

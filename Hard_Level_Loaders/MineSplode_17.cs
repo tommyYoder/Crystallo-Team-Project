@@ -7,12 +7,16 @@ using UnityEngine.SceneManagement;
 public class MineSplode_17 : MonoBehaviour
 {
 
-   
+   //Use for hard mode Escape level
     public Transform Player;
     private GameObject Mine;
     public GameObject deathParticle;
-    public AudioSource DeathSound;
-
+    public GameObject Eyes;
+    public GameObject LoadingScreen;
+    public float delay = 2.5f;
+    public string newGameLevel;
+    public Animator loadingScreen;
+    public Animator Fade;
 
 
     float nextTimeToSearch = 0;
@@ -21,6 +25,7 @@ public class MineSplode_17 : MonoBehaviour
     void Start()
     {
         //particleSystem.stop();
+        Eyes.SetActive(true);
 
     }
 
@@ -64,13 +69,19 @@ public class MineSplode_17 : MonoBehaviour
         }
     }
 
-
-    IEnumerator KillPlayer()                                                        // If player is dead, then player's mesh renderer is set to false, particle effect is instantiated, and after 1.5 seconds the level will reload the previous loading screen.
+    // If player is dead, then player's mesh renderer is set to false, eyes are set to false, particle effect is instantiated, and after 1.5 seconds the level will reload the previous loading screen.
+    IEnumerator KillPlayer()                                                      
     {
         Player.GetComponent<MeshRenderer>().enabled = false;
         Instantiate(deathParticle, transform.position, Quaternion.identity);
-        DeathSound.Play();
-        yield return new WaitForSeconds(1.5f);
+        Eyes.SetActive(false);
+        yield return new WaitForSeconds(.5f);
+        LoadingScreen.SetActive(true);
+        GetComponent<Animator>().SetTrigger("Fader");
+        loadingScreen.SetTrigger("Fader");
+        GetComponent<Animator>().SetTrigger("Fade");
+        Fade.SetTrigger("Fade");
+        yield return new WaitForSeconds(delay);
         SceneManager.LoadScene("LoadingScreen 5");
 
         print("worked");

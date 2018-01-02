@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MineSplode : MonoBehaviour
+public class MineSplode1 : MonoBehaviour
 {
-   
+   //Use for Lava level.
     public Transform destination;
     public Transform Player;
-    private GameObject Mine;
+    private GameObject Lava;
     public GameObject deathParticle;
     public GameObject Eyes;
 
@@ -36,9 +36,10 @@ public class MineSplode : MonoBehaviour
         }
 
     }
+    // If time to search is less then or equal to time, then script will look for player tag by its transform position.
     void FindPlayer()
     {
-        if (nextTimeToSearch <= Time.time)    // If time to search is less then or equal to time, then script will look for player tag by its transform position.
+        if (nextTimeToSearch <= Time.time)   
         {
             GameObject searchResult = GameObject.FindGameObjectWithTag("Player");
             if (searchResult != null)
@@ -54,9 +55,9 @@ public class MineSplode : MonoBehaviour
     {
         if (other.tag == "Player")                                 
         { 
-            Mine = GameObject.Find("Mine");
+            Lava = GameObject.Find("Lava");
 
-            Mine.GetComponent<MeshRenderer>().enabled = true;
+            Lava.GetComponent<MeshRenderer>().enabled = true;
             KillPlayer();
            
             StartCoroutine("KillPlayer");
@@ -76,7 +77,7 @@ public class MineSplode : MonoBehaviour
 
         if (Player == null)
         {
-            Mine = GameObject.Find("Player(Clone)");
+            Lava = GameObject.Find("Player(Clone)");
         }
         else
         {

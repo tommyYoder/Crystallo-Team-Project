@@ -3,8 +3,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ButtonManager : MonoBehaviour
+public class ButtonManager1 : MonoBehaviour
 {
+    //Use for main menu.
     public GameObject LoadingScreen;
     public Slider slider;
     public Text percText;
@@ -12,12 +13,15 @@ public class ButtonManager : MonoBehaviour
     public float delay = 2.5f;
     public Animator Fade;
 
+   
+   
 
-    // Starts function when button is clicked.
+    // Sets score to 0, sets deaths to 0, and starts game function when button is clicked.
     public void NewGameBtn(string newGameLevel)                     
     {
-       
-       
+
+        PlayerPrefs.SetInt("DeathCurrentLives", 0);
+        PlayerPrefs.SetInt("CurrentScore", 0);
         StartCoroutine(LoadAsynchronously(newGameLevel));
         
 
