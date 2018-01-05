@@ -9,12 +9,13 @@ public class FloorSpikeTrigger : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
+       
     }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")                               // If player enters collider, then sound will play.
         {
+           
             FloorSpikeSound.Play();
             FloorSpikeSound.loop = true;
         }
@@ -23,6 +24,7 @@ public class FloorSpikeTrigger : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
+           
             FloorSpikeSound.Stop();
             FloorSpikeSound.loop = false;
         }

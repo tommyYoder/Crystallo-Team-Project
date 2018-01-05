@@ -27,9 +27,9 @@ public class ButtonManager : MonoBehaviour
     {
             LoadingScreen.SetActive(true);
             GetComponent<Animator>().SetTrigger("Fade1");
-            loadingScreen.SetTrigger("Fade1");
+            loadingScreen.SetTrigger("Fade1");                    //Put Fade1 onto animator trigger component for the loading screen to fade to black.
             GetComponent<Animator>().SetTrigger("Fade");
-            Fade.SetTrigger("Fade");
+            Fade.SetTrigger("Fade");                             // Put Fade onto animator trigger component for the audio source to fade from 1 to 0.
             yield return new WaitForSeconds(delay);
             AsyncOperation operation = SceneManager.LoadSceneAsync(newGameLevel);
            

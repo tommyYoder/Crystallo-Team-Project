@@ -7,6 +7,7 @@ public class ButtonDown : MonoBehaviour {
 
     Animator anim;
     public AudioSource BreakSound;
+    public GameObject Door;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class ButtonDown : MonoBehaviour {
             anim.SetTrigger("Down");
             BreakSound.Play();
             GetComponent<Collider>().enabled = false;
+            Destroy(Door);
         }
    }
    

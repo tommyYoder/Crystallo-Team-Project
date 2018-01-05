@@ -24,7 +24,7 @@ public class Door : MonoBehaviour
                 yield return null;
             }
             if (OpenPosition != null) {                                                          // Will wait for 5 seconds before destroying door object.
-                yield return new WaitForSeconds(.5f);
+                yield return new WaitForSeconds(.1f);
                 Destroy(gameObject);
                 }
             }

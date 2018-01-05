@@ -334,7 +334,7 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
             GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
@@ -349,7 +349,7 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
             GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
@@ -365,7 +365,7 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
             GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
@@ -381,7 +381,7 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
             GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
@@ -397,7 +397,7 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
             GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
@@ -413,7 +413,7 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
             GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
@@ -429,7 +429,7 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
             GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
@@ -447,7 +447,7 @@ public class Player : MonoBehaviour {
             rb.useGravity = false;
             rb.isKinematic = true;
             DoorSound.Play();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
             GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
@@ -471,6 +471,8 @@ public class Player : MonoBehaviour {
             loadingScreen.SetTrigger("Fader");
             GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
+            GetComponent<Animator>().SetTrigger("Fade");               // For aura sound.
+            fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 7");
         }
@@ -488,6 +490,8 @@ public class Player : MonoBehaviour {
             GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
+            GetComponent<Animator>().SetTrigger("Fade");               // For aura sound.
+            fade.SetTrigger("Fade");
             SceneManager.LoadScene("LoadingScreen 10");
         }
 
@@ -503,11 +507,13 @@ public class Player : MonoBehaviour {
             loadingScreen.SetTrigger("Fader");
             GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
+            GetComponent<Animator>().SetTrigger("Fade");               // For aura sound.
+            fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 2");
         }
 
-        // Secret path portal Water Normal_1 level
+        // Secret path portal Water_3 Hard level
         if (other.gameObject.tag == "Portal3")
         {
             rb.useGravity = false;
@@ -519,6 +525,8 @@ public class Player : MonoBehaviour {
             loadingScreen.SetTrigger("Fader");
             GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
+            GetComponent<Animator>().SetTrigger("Fade");               // For aura sound.
+            fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 13");
         }
