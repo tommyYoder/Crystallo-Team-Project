@@ -9,6 +9,7 @@ public class Underwater : MonoBehaviour {
     public Color underwaterColor;
     public GameObject Bubbles;
     public Player player;
+    public AudioSource waterSound;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +25,7 @@ public class Underwater : MonoBehaviour {
             SetUnderwater();
             Bubbles.SetActive(true);
             player.jumpHeight = 60f;
+            waterSound.Play();
         }
     }
     // Sets fog to normal grey tint and player's jump height to 90.
@@ -34,6 +36,7 @@ public class Underwater : MonoBehaviour {
             SetNormal();
             Bubbles.SetActive(false);
             player.jumpHeight = 90f;
+            waterSound.Play();
         }
     }
 
