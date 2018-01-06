@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class LevelScreenLoader : MonoBehaviour {
 
+    //Use for Loadingscreen levels.
     public GameObject LoadingImage;
     public Slider slider;
     public Text percText;
@@ -23,7 +24,7 @@ public class LevelScreenLoader : MonoBehaviour {
     IEnumerator LoadLevelAfterDelay(string newGameLevel)
     {
         LoadingImage.SetActive(true);
-        GetComponent<Animator>().SetTrigger("Fader");
+        //GetComponent<Animator>().SetTrigger("Fader");
         loadingScreen.SetTrigger("Fader");
         yield return new WaitForSeconds(delay);
         AsyncOperation operation = SceneManager.LoadSceneAsync(newGameLevel);

@@ -66,9 +66,9 @@ public class MineSplode_1 : MonoBehaviour
         Instantiate(deathParticle, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(.5f);
         LoadingScreen.SetActive(true);
-        GetComponent<Animator>().SetTrigger("Fader");
+        //GetComponent<Animator>().SetTrigger("Fader");
         loadingScreen.SetTrigger("Fader");
-        GetComponent<Animator>().SetTrigger("Fade");
+        //GetComponent<Animator>().SetTrigger("Fade");
         Fade.SetTrigger("Fade");
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene("LoadingScreen 4");

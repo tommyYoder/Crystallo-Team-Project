@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour {
+    //Use for Cinemtaic and Ending Credits.
 
     public GameObject LoadingScreen;
     public Slider slider;
@@ -27,9 +28,9 @@ public class LevelLoader : MonoBehaviour {
     IEnumerator LoadLevelAfterDelay(string newGameLevel)
     {
         LoadingScreen.SetActive(true);
-        GetComponent<Animator>().SetTrigger("Fader");
+        //GetComponent<Animator>().SetTrigger("Fader");
         loadingScreen.SetTrigger("Fader");
-        GetComponent<Animator>().SetTrigger("Fade");
+        //GetComponent<Animator>().SetTrigger("Fade");
         Fade.SetTrigger("Fade");
         yield return new WaitForSeconds(delay);
         AsyncOperation operation = SceneManager.LoadSceneAsync(newGameLevel);

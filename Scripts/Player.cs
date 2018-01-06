@@ -336,9 +336,9 @@ public class Player : MonoBehaviour {
             DoorSound.Play();
             yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
            SceneManager.LoadScene("LoadingScreen 4");         
@@ -351,9 +351,9 @@ public class Player : MonoBehaviour {
             DoorSound.Play();
             yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 5");
@@ -367,9 +367,9 @@ public class Player : MonoBehaviour {
             DoorSound.Play();
             yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 7");
@@ -383,9 +383,9 @@ public class Player : MonoBehaviour {
             DoorSound.Play();
             yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 10");
@@ -399,9 +399,9 @@ public class Player : MonoBehaviour {
             DoorSound.Play();
             yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 1");
@@ -415,9 +415,9 @@ public class Player : MonoBehaviour {
             DoorSound.Play();
             yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 12");
@@ -431,11 +431,11 @@ public class Player : MonoBehaviour {
             DoorSound.Play();
             yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
-            GetComponent<Animator>().SetTrigger("Fade");               // For lava sound.
+           /* GetComponent<Animator>().SetTrigger("Fade");*/               // For lava sound.
             fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 8");
@@ -449,11 +449,11 @@ public class Player : MonoBehaviour {
             DoorSound.Play();
             yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
-            GetComponent<Animator>().SetTrigger("Fade");               // For lava sound.
+           /* GetComponent<Animator>().SetTrigger("Fade");  */             // For lava sound.
             fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 11");
@@ -467,11 +467,11 @@ public class Player : MonoBehaviour {
             WarpSound.Play();
             yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
-            GetComponent<Animator>().SetTrigger("Fade");               // For aura sound.
+          /*  GetComponent<Animator>().SetTrigger("Fade");   */            // For aura sound.
             fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 7");
@@ -485,13 +485,13 @@ public class Player : MonoBehaviour {
             WarpSound.Play();
             yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
-            yield return new WaitForSeconds(delay);
-            GetComponent<Animator>().SetTrigger("Fade");               // For aura sound.
+            /*  GetComponent<Animator>().SetTrigger("Fade");  */             // For aura sound.
             fade.SetTrigger("Fade");
+            yield return new WaitForSeconds(delay);     
             SceneManager.LoadScene("LoadingScreen 10");
         }
 
@@ -503,11 +503,11 @@ public class Player : MonoBehaviour {
             WarpSound.Play();
             yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
-            GetComponent<Animator>().SetTrigger("Fade");               // For aura sound.
+         /*   GetComponent<Animator>().SetTrigger("Fade");   */            // For aura sound.
             fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 2");
@@ -521,11 +521,11 @@ public class Player : MonoBehaviour {
             WarpSound.Play();
             yield return new WaitForSeconds(.5f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
-            GetComponent<Animator>().SetTrigger("Fade");               // For aura sound.
+         /*   GetComponent<Animator>().SetTrigger("Fade");   */            // For aura sound.
             fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("LoadingScreen 13");
@@ -539,9 +539,9 @@ public class Player : MonoBehaviour {
             KnightSound.Play();
             yield return new WaitForSeconds(1.3f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("End_Credits");
@@ -555,9 +555,9 @@ public class Player : MonoBehaviour {
             KnightSound.Play();
             yield return new WaitForSeconds(1.3f);
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fader");
+            //GetComponent<Animator>().SetTrigger("Fader");
             loadingScreen.SetTrigger("Fader");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene("End_Credits 1");

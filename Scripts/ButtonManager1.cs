@@ -30,9 +30,9 @@ public class ButtonManager1 : MonoBehaviour
     IEnumerator LoadAsynchronously(string newGameLevel)
     {
             LoadingScreen.SetActive(true);
-            GetComponent<Animator>().SetTrigger("Fade1");
+            //GetComponent<Animator>().SetTrigger("Fade1");
             loadingScreen.SetTrigger("Fade1");
-            GetComponent<Animator>().SetTrigger("Fade");
+            //GetComponent<Animator>().SetTrigger("Fade");
             Fade.SetTrigger("Fade");
             yield return new WaitForSeconds(delay);
             AsyncOperation operation = SceneManager.LoadSceneAsync(newGameLevel);
