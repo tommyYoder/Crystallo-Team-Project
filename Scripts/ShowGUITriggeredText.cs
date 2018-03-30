@@ -7,10 +7,13 @@ public class ShowGUITriggeredText : MonoBehaviour {
     //Use for triggered colliders.
 
     public GameObject Text;
+    public GameObject Border;
+
     // Use this for initialization
     void Start()
     {
         Text.SetActive(false);
+        Border.SetActive(false);
     }
 
     public void OnTriggerEnter(Collider other)
@@ -18,6 +21,7 @@ public class ShowGUITriggeredText : MonoBehaviour {
         if (other.gameObject.tag == "Player")
         {
             Text.SetActive(true);
+            Border.SetActive(true);
         }
     }
     public void OnTriggerExit(Collider other)
@@ -25,6 +29,7 @@ public class ShowGUITriggeredText : MonoBehaviour {
         if (other.gameObject.tag == "Player")
         {
             Text.SetActive(false);
+            Border.SetActive(false);
         }
     }
 }

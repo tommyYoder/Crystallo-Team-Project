@@ -15,12 +15,8 @@ public class ButtonManager : MonoBehaviour
 
     // Starts function when button is clicked.
     public void NewGameBtn(string newGameLevel)                     
-    {
-       
-       
-        StartCoroutine(LoadAsynchronously(newGameLevel));
-        
-
+    {             
+        StartCoroutine(LoadAsynchronously(newGameLevel));     
     }
     // Will load the game in the background while screen fades with animator animation on UI image, music fades to 0 with animator animator, and slider will updates with loading progress.
     IEnumerator LoadAsynchronously(string newGameLevel)
